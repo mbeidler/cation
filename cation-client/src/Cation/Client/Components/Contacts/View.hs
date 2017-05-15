@@ -18,7 +18,7 @@ contactsApp = defineControllerView "contactsApp" contactsStore render
         div_ [ "className" $= "panel-heading" ] $
           div_ [ "className" $= "container-fluid" ] $
             div_ [ "className" $= "row" ] $ do
-              h3_ [ "className" $= "mt-md col flex-first" ] "Carriers"
+              h3_ [ "className" $= "mt-md col flex-first" ] "Contacts"
         div_ [ "className" $= "panel-body" ] $
           case state of
             ContactsInit ->
