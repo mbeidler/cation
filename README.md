@@ -40,10 +40,14 @@ You can use the `http-server` **npm** package to serve the app.
 We made a `go` script in **package.json** that runs a stack build, copies the **all.js** output and launches **index.html**. 
 Note: if you're running on Windows, you'll need to be using *cygwin* / *mingw* / *msys*.
 
-```
+```bash
 cd cation-client
 stack setup
-npm run go
+npm install
+npm install -g browserify http-server
+browserify imports.js -o bundle.js
+stack build
+http-server .
 ```
 
 To run GHCJS interactive mode:
