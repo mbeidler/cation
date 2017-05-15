@@ -7,8 +7,17 @@ import React.Flux
 
 loadDeps :: IO ()
 loadDeps = do
-  js_addScript "http://localhost:8080/bundle.js"
+  js_addScript reactCdn
+  js_addScript reactDomCdn
   js_createRoot "app"
+
+reactCdn :: JSString
+reactCdn = 
+  "https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.min.js"
+
+reactDomCdn :: JSString
+reactDomCdn = 
+  "https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.min.js"
 
 renderApp :: IO ()
 renderApp = reactRender "app" view' ()
