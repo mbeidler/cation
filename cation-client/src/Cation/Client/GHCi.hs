@@ -2,7 +2,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Cation.Client.GHCi where
 
-import Cation.Client.Components.Modal
 import Data.JSString (JSString, toUpper)
 import React.Flux
 
@@ -19,11 +18,6 @@ renderApp = reactRender "app" view' ()
               h1_ "Hello, Test!"
               view nameForm mempty mempty
               view flavorForm mempty mempty
-              button_ [ "type" $= "button"
-                      , "className" $= "btn btn-primary pull-right flex-last"
-                      , "data-toggle" $= "modal"
-                      , "data-target" $= "#testModal" ] "Test Modal"
-              modal "testModal" "Test" (h1_ "Welcome!")
 
 nameForm :: ReactView ()
 nameForm = defineStatefulView "nameForm" "" $
