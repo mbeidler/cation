@@ -1,0 +1,39 @@
+{
+  "name": "cation-client",
+  "version": "0.0.1",
+  "description": "A full-stack Haskell web application template.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbeidler/cation.git"
+  },
+  "keywords": [
+    "GHCJS",
+    "Haskell",
+    "react-flux"
+  ],
+  "author": "Michael Beidler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbeidler/cation/issues"
+  },
+  "homepage": "https://github.com/mbeidler/cation#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "jquery": "^3.2.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "reactable": "^0.14.1",
+    "tether": "^1.4.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "browserify-css": "^0.10.1"
+  }
+}

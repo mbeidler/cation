@@ -1,0 +1,6 @@
+*~
+.stack-work
+all.js
+bundle.js
+node_modules
+*.log
