@@ -12,13 +12,13 @@ import           React.Flux
 import           React.Flux.Addons.Servant  (request)
 
 data ContactsStore
-  = Init
+  = ContactsInit
   | ContactsState { contacts :: [Contact] }
   deriving (Generic, NFData)
 
 data ContactsAction
-  = Load
-  | LoadComplete (Response [Contact])
+  = LoadContacts
+  | LoadContactsComplete (Response [Contact])
   deriving (Generic, NFData)
 
 instance StoreData ContactsStore where
@@ -26,14 +26,14 @@ instance StoreData ContactsStore where
 
   transform action state =
     case action of
-      Load -> do
-        req (Proxy :: Proxy GetContacts) (dispatch . LoadComplete)
+      LoadContacts -> do
+        req (Proxy :: Proxy GetContacts) (dispatch . LoadContactsComplete)
         return state
-      LoadComplete response ->
+      LoadContactsComplete response ->
         onResp (pure . ContactsState) response state
 
 dispatch :: ContactsAction -> IO [SomeStoreAction]
 dispatch action = pure [SomeStoreAction contactsStore action]
 
 contactsStore :: ReactStore ContactsStore
-contactsStore = mkStore Init
+contactsStore = mkStore ContactsInit

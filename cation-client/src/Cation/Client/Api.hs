@@ -17,7 +17,7 @@ type Response a = Either (Int, String) a
 -- | The request settings for 'API', consisting of base URL and timeout.
 cfg :: ApiRequestConfig API
 cfg =
-  ApiRequestConfig "http://localhost:3000" (TimeoutMilliseconds (120 * 1000))
+  ApiRequestConfig "http://localhost:8081" (TimeoutMilliseconds (120 * 1000))
 
 -- | A 'request' using 'cfg'.
 req :: (IsElem endpoint API, HasAjaxRequest endpoint)
