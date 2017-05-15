@@ -61,7 +61,7 @@ cd cation-client
 stack ghci
 ```
 
-Now open a browser to **localhost:6400** to connect to GHCi.
+Now open a browser to **localhost:6400** to connect to GHCJSi.
 
 You can use interactive mode from emacs by using the `exec-path-from-shell` package:
 
