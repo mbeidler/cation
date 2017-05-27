@@ -13,7 +13,7 @@ On Debian-based systems, the following is all that is needed to be able to run t
 if they don't exist and performs any necessary migrations if they do.
 
 ```bash
-apt install postgres libpq-dev
+sudo apt-get install postgres libpq-dev
 sudo -u postgres createuser -se test
 sudo -u postgres psql -c "alter role test with password 'test'"
 sudo -u postgres psql -c "create database cation"
