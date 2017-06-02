@@ -1,5 +1,12 @@
 # cation
-A full-stack Haskell web application template.
+
+A full-stack Haskell web application template. 
+
+cation uses [servant](http://haskell-servant.readthedocs.io/en/stable/) and 
+[persistent](https://hackage.haskell.org/package/persistent) on the server, and 
+[react-flux](https://hackage.haskell.org/package/react-flux) on the client. It also contains a sample endpoint to demonstrate documentation with [servant-swagger](https://hackage.haskell.org/package/servant-swagger), using existing React components, etc.
+
+See the [slides](http://slides.com/mbeidler/pdxfunc-haskell#/) from my recent talk at pdxfunc.
 
 ## cation-server
 
@@ -43,11 +50,11 @@ Note: if you're running on Windows, you'll need to be using *cygwin* / *mingw* /
 ```bash
 cd cation-client
 stack setup
+stack build
 npm install
 npm install -g browserify http-server
 browserify imports.js -o bundle.js
-stack build
-http-server .
+npm run go
 ```
 
 To run GHCJS interactive mode:
