@@ -1,6 +1,6 @@
 # cation
 
-A full-stack Haskell web application template. 
+A full-stack Haskell web application starter project. 
 
 cation uses [servant](http://haskell-servant.readthedocs.io/en/stable/) and 
 [persistent](https://hackage.haskell.org/package/persistent) on the server, and 
