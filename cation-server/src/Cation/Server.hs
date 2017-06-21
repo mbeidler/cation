@@ -5,17 +5,18 @@ module Cation.Server where
 
 import           Cation.Common.Api.Contacts
 import           Cation.Server.Api.Contacts
-import           Cation.Server.Docs.Contacts
 import           Cation.Server.Base
-import           Cation.Server.Db           (doMigrations)
-import           Control.Monad.Except       (ExceptT)
-import           Control.Monad.Reader       (ReaderT, runReaderT)
-import           Database.Persist.Sql       (runSqlPool)
-import           Network.Wai                (Application)
-import           Network.Wai.Handler.Warp   (run)
-import           Safe                       (readMay)
+import           Cation.Server.Db            (doMigrations)
+import           Cation.Server.Docs.Contacts
+import           Control.Monad.Except        (ExceptT)
+import           Control.Monad.Reader        (ReaderT, runReaderT)
+import           Database.Persist.Sql        (runSqlPool)
+import           Network.Wai                 (Application)
+import           Network.Wai.Handler.Warp    (run)
+import           Network.Wai.Middleware.Cors (simpleCors)
+import           Safe                        (readMay)
 import           Servant
-import           System.Environment         (lookupEnv)
+import           System.Environment          (lookupEnv)
 
 -- | Given a 'Config', a WAI 'Application' is returned, which any WAI compliant
 -- server can run.
@@ -52,7 +53,7 @@ runServer = do
   let cfg = Config { getPool = pool, getEnv = env }
       logger = setLogger env
   runSqlPool doMigrations pool
-  run port $ logger $ app cfg
+  run port $ logger $ simpleCors $ app cfg
 
 -- | Looks up a setting in the environment, with a provided default, and
 -- 'read's that information into the inferred type.

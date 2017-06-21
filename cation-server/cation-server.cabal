@@ -38,6 +38,7 @@ library
                      , time
                      , transformers
                      , wai
+                     , wai-cors
                      , wai-extra
                      , warp
   default-language:    Haskell2010
