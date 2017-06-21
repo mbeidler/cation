@@ -32,9 +32,13 @@ data ColumnCfg a handler = ColumnCfg
 instance Default (ColumnCfg a handler) where
   def = ColumnCfg mempty mempty True (const mempty)
 
-defCol :: Text -> (a -> ReactElementM handler ()) -> ColumnCfg a handler
-defCol name selector = ColumnCfg name name True selector
+-- | Define a column.
+defCol :: Text                            -- ^ The column header text.
+       -> (a -> ReactElementM handler ()) -- ^ A renderer for column data.
+       -> ColumnCfg a handler             -- ^ The column configuration.
+defCol name = ColumnCfg name name True
 
+-- | Render a Reactable table using the provided configuration and source list.
 table_ :: TableCfg a handler -> [a] -> ReactElementM handler ()
 table_ TableCfg{..} xs =
   foreign_ "Table"
@@ -50,7 +54,7 @@ table_ TableCfg{..} xs =
     rowHeader ColumnCfg{..} =
       foreign_ "Th" [ "column" &= colName ] (elemText colName)
     rowValue cs x =
-      foreign_ "Tr" [] $ do
+      foreign_ "Tr" [] $
         mapM_ (\ColumnCfg{..} ->
           foreign_ "Td" [ "column" &= colName ] (colSelector x)) cs
     filterableColumns =
