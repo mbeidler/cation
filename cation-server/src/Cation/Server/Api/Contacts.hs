@@ -7,10 +7,9 @@ import           Cation.Common.Conventions
 import           Cation.Server.Base
 import           Cation.Server.Db            (runDb)
 import qualified Cation.Server.Db            as Db
-import           Data.Maybe                  (maybe)
-import           Data.Text                   (Text)
-import           Database.Persist.Postgresql (Entity (..), delete, fromSqlKey, get,
-                                              insert, replace, selectList, toSqlKey)
+import           Database.Persist.Postgresql (Entity (..), delete, fromSqlKey,
+                                              get, insert, replace, selectList,
+                                              toSqlKey)
 import           Servant
 
 contactsServer :: ServerT ContactsAPI App
@@ -38,17 +37,17 @@ updateContact c@Contact{..} = do
   return c
 
 getContact :: Key -> App Contact
-getContact id = do
-  c <- runDb $ get (toSqlKey id)
+getContact key = do
+  c <- runDb $ get (toSqlKey key)
   case c of
-    Just c -> return $ fromModel id c
-    Nothing -> throwError err404 { errBody = "contact not found" }
+    Just contact -> return $ fromModel key contact
+    Nothing      -> throwError err404 { errBody = "contact not found" }
 
 deleteContact :: Key -> App Key
-deleteContact id = runDb (delete (toSqlKey id :: Db.ContactId)) *> pure id
+deleteContact key = runDb (delete (toSqlKey key :: Db.ContactId)) *> pure key
 
 fromEntity :: Entity Db.Contact -> Contact
-fromEntity (Entity id c) = fromModel (fromSqlKey id) c
+fromEntity (Entity key c) = fromModel (fromSqlKey key) c
 
 fromModel :: Key -> Db.Contact -> Contact
 fromModel key Db.Contact{..} =

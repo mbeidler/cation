@@ -4,8 +4,8 @@ module Cation.Server.Base where
 
 import           Control.Exception                    (throwIO)
 import           Control.Monad.Except                 (ExceptT, MonadError)
-import           Control.Monad.Logger                 (runNoLoggingT,
-                                                       runStdoutLoggingT)
+import           Control.Monad.Logger                 (runStdoutLoggingT)
+
 import           Control.Monad.Reader                 (MonadIO, MonadReader,
                                                        ReaderT)
 import           Control.Monad.Trans.Maybe            (MaybeT (..), runMaybeT)
