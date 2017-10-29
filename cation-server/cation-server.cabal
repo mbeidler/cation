@@ -42,6 +42,7 @@ library
                      , wai-extra
                      , warp
   default-language:    Haskell2010
+  ghc-options:         -Wall
 
 executable cation-server-exe
   hs-source-dirs:      app

@@ -8,6 +8,7 @@ import           Cation.Server.Api.Contacts
 import           Cation.Server.Base
 import           Cation.Server.Db            (doMigrations)
 import           Cation.Server.Docs.Contacts
+import           Control.Category            ((<<<), (>>>))
 import           Control.Monad.Except        (ExceptT)
 import           Control.Monad.Reader        (ReaderT, runReaderT)
 import           Database.Persist.Sql        (runSqlPool)
@@ -33,7 +34,7 @@ server = return contactsSwagger :<|> contactsServer
 -- | This functions tells Servant how to run the 'App' monad with our
 -- 'server' function.
 appToServer :: Config -> Server API
-appToServer cfg = enter (convertApp cfg) server
+appToServer cfg = enter (convertApp cfg >>> NT Handler) server
 
 -- | This function converts our 'App' monad into the @ExceptT ServantErr
 -- IO@ monad that Servant's 'enter' function needs in order to run the
@@ -41,7 +42,7 @@ appToServer cfg = enter (convertApp cfg) server
 -- non-category theory terms, a function that converts two type
 -- constructors without looking at the values in the types.
 convertApp :: Config -> App :~> ExceptT ServantErr IO
-convertApp cfg = Nat (flip runReaderT cfg . runApp)
+convertApp cfg = runReaderTNat cfg <<< NT runApp
 
 -- | The 'run' function gathers the required environment information and
 -- runs the application.
